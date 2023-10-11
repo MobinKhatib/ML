@@ -1,0 +1,419 @@
+
+
+%\subsection*{\texttt{center} environment: (standard \LaTeX{})}
+\begin{titlepage}
+\begin{center}
+
+\Huge
+\textbf{به نام خدا}\\[2cm]
+
+\huge
+\textbf{ پروژه درس آشنایی با ماشین لرنینگ}\\[0.5cm]
+\textbf{دکتر سجاد امینی}\\[1.5cm]
+\textbf{فاز اول}\\[1.5cm]
+\Large
+\textbf{مبین خطیب}\\[0.3cm]
+\textbf{99106114}\\[0.5cm]
+\textbf{محمد علی هاشمی فر}\\[0.3cm]
+\textbf{99107658}\\[0.5cm]
+
+
+
+
+
+
+\begin{center}
+\includegraphics[width=0.5\textwidth]{logo.jpg}
+\end{center}
+\end{center}
+\end{titlepage}
+
+
+
+
+\newpage
+\huge
+\raggedright \section{\lr{ Theory Question }}
+\large
+
+\raggedright \lr{1. In your own words, explain how the MM algorithm can deal with nonconvex
+optimization objective functions by considering simpler convex objective functions.}
+
+\raggedleft
+ با به حداقل رساندن مکرر یک تابع جایگزین محدب که مرزهای بالایی تابع هدف غیر محدب را در نقطه فعلی محدود می کند، کار می کند.
+
+ایده این است که تابع هدف غیر محدب را با یک تابع محدب ساده‌تر که به راحتی بهینه می‌شود، تقریب بزنیم. در هر تکرار، الگوریتم MM یک تابع جانشین محدب می سازد که تابع هدف غیر محدب را در نقطه فعلی بزرگ می کند. 
+
+سپس این تابع جایگزین برای یافتن نقطه بعدی به حداقل می رسد و همینطور الی آخر تا زمانی که به خواسته مد نظرمان برسیم.تابع بهینه ای که قرار است به تابع هدف نزدیک شود در واقع کوچک یا بزرگ میشود تا زمانی که بدانیم حرکت تابع به بالا یا پایین کافی است .
+
+منظور از بالاو پایین این است که زمانی که قرار است تابع را مینیمایز کنیم هدف حداکثر کردن/حداقل کردن است و زمانی که ماکسیمایز کنیم هدف کوچک کردن/حداکثر کردن است.
+\newpage
+\huge
+\raggedright \section{\lr{ Theory Question }}
+\large
+
+\begin{equation}
+p(y; \theta) = \sum_{k=1}^K p_Z(z_k; \theta) p_{Y|Z}(y|Z = z_k; \theta)
+\end{equation}
+\begin{flushright}
+متغیر هایی که بولد شده اند درواقع نشان دهنده یک بردار هستند در اینجا نیز ما برای اینکه به معادله9 نزدیک تر شویم تلاش میکنیم که y را به \textbf y تبدیل کنیم در واقع میخواهیم آن را از لحاظ برداری نشان دهیم آنگاه خواهیم داشت:
+\end{flushright}
+\begin{equation}
+p(y_1 , y_2 , .... y_n ; \theta) = \sum_{k=1}^K p_Z(z_k; \theta) p_{Y|Z}(y_1 , y_2 , .... y_n |Z = z_k; \theta)
+\end{equation}
+\begin{flushright}
+از آنجا که نمونه های $y_1, y_2 , ... ,y_n $ مستقل از هم هستند در واقع میتوان اشتراک آنها را به صورت حاصلضربشان نوشت و در نتیجه خواهیم داشت:
+\end{flushright}
+\begin{equation}
+p(y_1 , y_2 , .... y_n ; \theta) = p(y_1  ; \theta) p(y_2  ; \theta)  .... p(y_n  ; \theta) = \prod_{i=1}^N p(y^{(i)}  ; \theta)
+\end{equation}
+\begin{flushright}
+که همانطور که گفتیم این همان وکتور بولد y خواهد شد به این شکل:
+\end{flushright}
+\begin{equation}
+ \prod_{i=1}^N p(y^{(i)}  ; \theta) =  p_{\textbf Y}(y  ; \theta)
+\end{equation}
+\begin{flushright}
+که حالا اگر از دوطرف لگاریتم طبیعی آن را بگیریم و با توجه به این موضوع که لگاریتم ضرب ها جمع لگاریتم ها میشود:
+\end{flushright}
+\begin{equation}
+ln p_{\textbf Y}(y  ; \theta) =ln \prod_{i=1}^N p(y^{(i)}  ; \theta) = \sum_{i=1}^N \ln p(y^{(i)}  ; \theta) 
+\end{equation}
+\begin{flushright}
+که در واقع در اینجا به معادله وسطی معادله 9 رسیدیم و با دخیل کردن متغیر های پنهان که همان z ها هستند و با توجه به قانون بیز میتوان به سمت راست معادله 9 هم دست پیدا کرد:
+\end{flushright}
+\begin{flalign*}
+\ln (p_{\textbf Y}(y; \theta)) = \sum_{i=1}^N \ln p(y^{(i)}  ; \theta) 
+& = \ln \prod_{i=1}^N \left( \sum_{k=1}^K p_{Y,Z}(y^{(i)},Z^{(i)} = k; \theta)\right) 
+\\
+ &= \sum_{i=1}^N \ln \left( \sum_{k=1}^K p_{Y,Z}(y^{(i)},Z^{(i)} = k; \theta)\right)
+\\
+& =\sum_{i=1}^N \ln \sum_{k=1}^K p_Z(z_k; \theta) p_{Y|Z}(y|Z = z_k; \theta)
+\end{flalign*}
+\begin{flushright}
+از معادله آخر واضح است که به مقصودمان رسیدیم و کار تمام است
+\end{flushright}
+\begin{flushright}
+در زمینه مدل های مخلوط، توزیع احتمال مشترک داده های مشاهده شده Y و متغیرهای پنهان Z را می توان به صورت زیر بیان کرد:
+\end{flushright}
+$ p(Y , Z ; \theta) = p(Y|Z ; \theta) p(Z ; \theta) $
+\begin{flushright}
+در جایی که $ \theta $ پارامترهای مدل را نشان می دهد،$ (Y|Z؛\theta )p $تابع احتمال است، و $ p(Z; \theta)  $ احتمال قبلی متغیرهای پنهان است.
+
+هدف بهینه‌سازی در میکسچر مدل یافتن مقادیر $ \theta $ است که احتمال داده‌های مشاهده‌شده Y را با توجه به پارامترهای مدل به حداکثر می‌رساند. این را می توان با محاسبه احتمال نهایی Y بدست آورد:
+\end{flushright}
+$ p(Y ; \theta) = \int p(Y , Z ; \theta)  , dZ $
+\begin{flushright}
+که در آن انتگرال بر روی تمام مقادیر ممکن متغیرهای پنهان Z گرفته می شود.
+
+اغلب بهینه سازی تابع درستنمایی مشترک $ p(Y, Z; \theta)  $ نسبت به تابع احتمال حاشیه $ p(Y ; \theta) $ به طور مستقیم آسان تر است. این به این دلیل است که تابع درستنمایی مشترک به حاصلضرب احتمالات شرطی بر روی متغیرهای پنهان تجزیه می شود:
+\end{flushright}
+$ p(Y , Z ; \theta) = \Pi p(y_n , z_n ; \theta ) $
+\begin{flushright}
+جایی که n نقاط داده را در Y  نشان میدهد.
+
+این تجزیه امکان استفاده از الگوریتم  (EM) را فراهم می کند، که به طور متناوب بین محاسبه امید شرطی متغیرهای پنهان با توجه به داده های مشاهده شده و برآورد فعلی پارامترهای مدل (گام E) و به حداکثر رساندن امید مورد انتظار \lr{expected complete log-likelihood} با توجه به پارامترهای مدل (مرحله M) تغییر میکند
+
+با بهینه‌سازی$ p(Y, Z; \theta)  $ با استفاده از الگوریتم EM، می‌توانیم تخمین‌های حداکثر احتمال پارامترهای $ \theta $ را به دست آوریم که احتمال نهایی p (Y; θ) را به حداکثر می‌رسانند. این رویکرد اغلب کارآمدتر و از نظر عددی پایدارتر از بهینه‌سازی مستقیم $ p(\theta,Y) $ به دلیل ساختار تابع احتمال در میکسچر مدل است.
+
+\end{flushright}
+\newpage
+\huge
+\raggedright \section{\lr{ Theory Question }}
+\large
+\raggedright \lr{3. Read about variational inference (or variational bayesian methods) and
+compare it with the procedure we used for the EM algorithm (You might want to check
+Wikipedia for this!).}
+\begin{flushright}
+خواهیم دید \lr{variational inference}  شامل یافتن مدل و پارامترهای مناسبی است که توزیع مشاهدات را به خوبی نشان می دهد. فرض کنید x مشاهدات و $ \theta $ پارامترهای مجهول یک مدل ML باشد. در MLE، ما سعی می‌کنیم $ \theta_{ML} $ را پیدا کنیم که احتمال مشاهدات را با استفاده از مدل ML با پارامترهای زیر به حداکثر می‌رساند:
+\begin{equation}
+\hat{\theta}_{ML} = argmax_\theta p(x;\theta)
+\end{equation}
+به طور معمول، برای حل مسئله بهینه سازی فوق، مسئله به فرضیات کمی نیاز دارد. یک روش معرفی متغیرهای پنهان z است  که مسئله را به مسائل فرعی کوچکتر تقسیم می کند. به عنوان مثال، در \lr{Gaussian mixture model}  می‌توانیم تخصیص عضویت خوشه‌ای را به عنوان متغیرهای تصادفی zi برای هر xi معرفی کنیم که در نتیجه این موضوع خواهیم داشت:
+$ \mathcal p(x_i\mid z_i = k) \sim \mathcal N(\mu_k,\sigma_k) $
+که مدل را بسیار ساده می کند.
+این روش را می توان به عنوان بسط الگوریتم انتظار-بیشینه سازی (EM) از تخمین MAP از محتمل ترین مقدار هر پارامتر تا تخمین کاملاً بیزی که کل توزیع پسین را محاسبه می کند مشاهده کرد. از پارامترها و متغیرهای پنهان همانطور که در EM، مجموعه ای از مقادیر پارامتر بهینه را پیدا می کند، و همان ساختار متناوب EM را دارد، بر اساس مجموعه ای از معادلات به هم قفل شده (وابسته متقابل) که به صورت تحلیلی قابل حل نیستند.
+
+برای بسیاری از کاربردها، \lr{varitional Bayes} راه حل هایی با دقت قابل مقایسه با نمونه برداری گیبس با سرعت بیشتری تولید می کند. با این حال، استخراج مجموعه معادلات مورد استفاده برای به‌روزرسانی مکرر پارامترها، در مقایسه با استخراج معادلات نمونه‌گیری گیبس، اغلب به مقدار زیادی کار نیاز دارد. این مورد حتی برای بسیاری از مدل‌هایی است که از نظر مفهومی کاملاً ساده هستند، همانطور که در زیر در مورد یک مدل پایه غیر سلسله مراتبی با تنها دو پارامتر و بدون متغیر پنهان نشان داده شده است.
+با استفاده از خواص امیدریاضی ، عبارت 
+$  E_{i \neq j}[ln p(Z,X)]  $
+می‌توان به تابعی از هایپرپارامترهای ثابت توزیع‌های قبلی بر روی متغیرهای پنهان و امید از متغیر های پنهانی که در پارتیشن فعلی نیستند ساده‌سازی کرد.این وابستگی های دایره ای بین پارامترهای توزیع بر روی متغیرهای یک پارتیشن و امیدمتغیرها در پارتیشن های دیگر ایجاد می کند. این به طور طبیعی یک الگوریتم \lr{iterative} را پیشنهاد می‌کند، بسیار شبیه به EM  که در آن امید متغیرهای پنهان به روشی (شاید به صورت تصادفی) مقداردهی اولیه می‌شوند و سپس پارامترهای هر توزیع به نوبه خود با استفاده از مقادیر فعلی امیدها محاسبه می شود، پس از آن امیدریاضی توزیع جدید محاسبه شده به طور مناسب با توجه به پارامترهای محاسبه شده تنظیم می شود. این الگوریتم تضمین شده است که همگرا شود.به عبارت دیگر، برای هر یک از پارتیشن‌های متغیرها، با ساده‌سازی عبارت توزیع بر روی متغیرهای پارتیشن و بررسی وابستگی عملکردی توزیع به متغیرهای مورد نظر، معمولاً می‌توان خانواده توزیع را تعیین کرد . فرمول پارامترهای توزیع بر حسب هایپرپارامترهای توزیع های قبلی و همچنین بر حسب انتظارات توابع متغیرها در پارتیشن های دیگر بیان می شود. معمولاً این امیدها را می توان به توابع امید خود متغیرها ساده کرد. در بیشتر موارد، توزیع سایر متغیرها از خانواده های شناخته شده خواهد بود و فرمول های امید مربوطه را می توان جستجو کرد. این فرمول ها به پارامترهای آن توزیع ها بستگی دارند، که به نوبه خود به امید در مورد سایر متغیرها بستگی دارد. نتیجه این است که فرمول های پارامترهای توزیع هر متغیر را می توان به صورت مجموعه ای از معادلات با وابستگی های متقابل و غیرخطی بین متغیرها بیان کرد. معمولاً نمی توان مستقیماً این سیستم معادلات را حل کرد. با این حال، همانطور که در بالا توضیح داده شد، وابستگی ها یک الگوریتم تکراری ساده را پیشنهاد می کنند که در بیشتر موارد تضمین شده است که همگرا شوند.
+
+هر دو الگوریتم EM و روش‌های بیزی متغیر برای انجام استنتاج احتمالی در مدل‌های پیچیده استفاده می‌شوند. با این حال، تفاوت هایی بین این دو روش وجود دارد:
+
+1- الگوریتم EM برای تخمین حداکثر احتمال یا حداکثر تخمین های پسینی (MAP) پارامترهای یک مدل با متغیرهای پنهان استفاده می شود، در حالی که از روش های بیزی متغیر برای تقریب توزیع پسین بر روی متغیرهای پنهان استفاده می شود.
+
+2- الگوریتم EM یک روش بهینه‌سازی تکراری است که به طور متناوب بین تخمین مقادیر متغیرهای پنهان با استفاده از تخمین‌های فعلی پارامترها و به‌روزرسانی پارامترها با استفاده از مقادیر تخمینی متغیرهای نهفته است. در مقابل، روش‌های بیزی متغیر یک کران پایین‌تر در احتمال حاشیه‌ای داده‌ها را با توجه به پارامترهای تغییرات بهینه می‌کنند.
+
+3- الگوریتم EM فرض می‌کند که متغیرهای پنهان به طور تصادفی  lost شده‌اند و مدل قابل پردازش است. روش‌های بیزی متغیر هیچ فرض خاصی در مورد مکانیسم داده‌های از دست رفته ایجاد نمی‌کنند، اما نیاز دارند که مدل به عنوان یک شبکه بیزی مشخص شود.
+
+4- الگوریتم EM تضمین شده است که به حداکثر محلی احتمال یا برآورد MAP همگرا می شود، اما ممکن است در \lr{local maximum} به مشکل بخورد. روش‌های بیزی متغیر چنین تضمین‌هایی ندارند اما می‌توانند تخمین‌های بهتری از توزیع پسین بر روی متغیرهای پنهان ایجاد کنند.
+
+5- الگوریتم EM را می توان برای مجموعه داده های بزرگ و مدل های پیچیده اعمال کرد، اما ممکن است برای همگرا شدن نیاز به تکرارهای زیادی داشته باشد. روش‌های بیزی متغیر از نظر محاسباتی پیچیده تر هستند، اما می‌توانند برای داده‌های با ابعاد بالا و مدل‌های پیچیده کارآمدتر باشند.
+\end{flushright}
+\newpage
+\huge
+\raggedright \section{\lr{ Theory Question }}
+\large
+\begin{latin}
+4. Compute estimate of parameters for Gaussian Mixture Models for N observed data ${{x_i}}_{i=1}^{N} = 1$
+
+1. Determine model parameters and initialize them.
+
+\end{latin}
+\raggedleft
+در واقع EM الگوریتمی برای یافتن MLE یا MAP برای مسئله های متغیرهای پنهان است اگر بدانیم هر نقطه به چه خوشه‌ای تعلق دارد (مثلاً متغیرهای $ {z_i} $ )می‌توانیم داده‌ها را تقسیم بندی کنیم و MLE را برای هر خوشه به طور جداگانه پیدا کنیم. هر xi با یک متغیر پنهان همراه است:
+$z_i = (z_{i1}, . . . , z_{iK} )$
+در نتیجه \lr{complete data} برای ما به شکل :
+$ (x , z) = (x_i , z_i ), i = 1, . . . , n $
+خواهد بود و حالا میتوانیم پارامتر ها را ماکزیمم کردن \lr{complete data} برای \lr{log likelihood} انجام دهیم 
+پارامتر متغیر پنهان $ {z_ik} $  نشان دهنده سهم k-امین گاوسی در xi است مشتق \lr{log-likelihood}  برای سه متغیر 
+$ \mu_k ,\sigma_k,\pi_k $
+که:
+
+\raggedright $ \pi = \pi_1,....,\pi_k $
+
+\raggedright $ \mu = ( \mu_1,....,\mu_k) $
+
+\raggedright $ \Sigma = ( \Sigma_1 ,....., \Sigma_k ) $
+
+\begin{flushright}
+برای سه متغیر مشتق آن ها را روی صفر قرار میدهیم تا معادلات مورد استفاده در الگوریتم EM بدست آوریم
+برای محاسبه پارامتر های مدل که در بالا ذکر شدند ابتدا باید به این نکته توجه کنیم که:
+\end{flushright}
+\raggedright $ -\log Pr(x|\pi,\mu,\Sigma) = -\sum_{i=1}^{n}\log{ \sum_{k=1}^{K}\pi_kN(x|\mu_k,\Sigma_k)} $
+\begin{flushright}
+حالا که متغیر پنهان z نیز ذر این معادله دخیل شود آنگاه شکل معادله به صورت زیر خواهد شد:
+\end{flushright}
+\raggedright $ -\log Pr(x,z|\pi,\mu,\Sigma) = -\sum_{i=1}^{n}\sum_{k=1}^{K}{\log\pi_k+\log N(x,z|\mu_k,\Sigma_k )}$
+\begin{flushright}
+در اینجا باید توجه کنیم که $ \pi_k $ و  $ (\mu_k,\Sigma_k) $ جدا از هم محاسبه خواهند شد و روش محاسبه آنها نیز که ذکر شد با مشتق گیری است که در ادامه آن را پیاده خواهیم کرد.
+مقدار دهی اولیه را با $ \mu_0 , \sigma_0I , \pi_0 $ پیگیری میکنیم و  محاسبه در مرحله k ام در قسمت3 انجام خواهد شد
+
+مثال برای سه متغیر سه تایی:
+\end{flushright}
+\begin{center}
+\includegraphics[width=0.5\textwidth]{4.1.jpg}
+\end{center}
+\begin{center}
+\lr{mixture of three Gaussians}
+\end{center}
+\begin{latin}
+
+\newpage
+\raggedright 2. Compute complete dataset likelihood.
+\end{latin}
+\begin{flushright}
+در مرحله \lr{E step }خواهیم داشت:
+\end{flushright}
+\begin{flalign*}
+r_{ik}^t = p(z_{i=k} \mid x_{i}, \theta^t) = \frac{\pi_{k}^t p(x_{i} \mid \theta_{k}^t)}{\sum_{k'=1}^{K}\pi_{k'}^t p(x_{i} \mid \theta_{k'}^t)}
+\end{flalign*}
+\begin{flushleft}
+\begin{flushright}
+در مرحله \lr{M step }خواهیم داشت:
+\end{flushright}
+\begin{flalign*}
+\operatorname{LL^t}(\theta) 
+&= E \Bigg[ \sum_{i=1}^{N} \log p(z_{i}|\theta) + \log p(x_{i}|z_{i};\theta) \Bigg] \
+\end{flalign*}
+\begin{flalign*}
+ &=E \Bigg[ \sum_{i=1}^{N} \log \prod_{k=1}^{K} \pi_k^(z_{ik}) + \log \prod_{k=1}^{K} \mathcal{N}(x_{i}|\mu_{k}, \Sigma_{k})^{z_{ik}} \Bigg] \ 
+\end{flalign*}
+\begin{flalign*}
+& = \sum_{i=1}^{N} \sum_{k=1}^{K} E[z_{ik}] \log \pi_{k} + \sum_{i=1}^{N} \sum_{k=1}^{K} E[z_{ik}] \log \mathcal{N}(x_{i}|\mu_{k}, \Sigma_{k}) 
+\end{flalign*}
+\begin{flalign*}
+\sum_{i=1}^{N} \sum_{k=1}^{K} r_{ik}^t \log \pi_{k} \quad - \frac{1}{2} \sum_{i=1}^{N} \sum_{k=1}^{K} r_{ik}^t \log \Sigma_{k} (\mathbf{x}{i} - \boldsymbol{\mu}{k})^{T} \Sigma_{k}^{-1} (\mathbf{x}{i} - \boldsymbol{\mu}{k}) + \text{const}
+\end{flalign*}
+\end{flushleft}
+\begin{flushright}
+در اینجا $ z_{ik} = \mathcal I(z_i=k) $ یک متغیر \lr{one hot} از متغیر cathegorical برای $ z_i $ میباشد.
+\end{flushright}
+\begin{latin}
+\newpage
+\raggedright 3. Find closed-form solution for parameters using EM algorithm.
+\end{latin}
+\begin{flushright}
+در اینجا باید توجه کنیم که $ \pi_k $ و  $ (\mu_k,\Sigma_k) $ جدا از هم محاسبه خواهند شد و روش محاسبه آنها نیز که ذکر شد با مشتق گیری است که در ادامه آن را پیاده خواهیم کرد:
+\end{flushright}
+\begin{equation}
+\raggedright  0 = \frac{\partial}{\partial \pi_j} \left[ \sum_{i}\sum_{k} r_{ik} \log \pi_k + \lambda (1 - \sum_k \pi_k) \right]
+\end{equation}
+
+\begin{equation}
+ \quad \pi_k^{t+1} = \frac{1}{n} \sum_i r_{ik}^t = r_k^t/n 
+\end{equation}
+
+\begin{equation}
+J(\mu_k,\Sigma_k) = -\frac{1}{2}\sum_{i} r_{ik} \log|\Sigma_k| + (x_i - \mu_k)^T \Sigma_k^{-1} (x_i - \mu_k)
+\end{equation}
+
+\begin{equation}
+\frac{\partial J(\mu_k,\Sigma_k)}{\partial \mu_k} = \sum_{i} r_{ik} \Sigma_k^{-1} (x_i - \mu_k) = 0
+\end{equation}
+
+\begin{equation}
+\mu_k^{t+1} = \frac{\sum_{i} r_{ik}^t x_i}{\sum_{i} r_{ik}^t}
+\end{equation}
+
+\begin{equation}
+\Sigma_k^{t+1} = \frac{\sum_{i} r_{ik}^t (x_i - \mu_k^{t+1}) (x_i - \mu_k^{t+1})^T}{\sum_{i} r_{ik}^t} = \frac{\sum_{i} r_{ik}^t x_i x_i^T}{\sum_{i} r_{ik}^t} - \mu_k^{t+1} ({\mu_k^{t+1}})^T
+\end{equation}
+\newpage
+\huge
+\raggedright \section{\lr{ Theory Question }}
+\large
+\begin{latin}
+5. Compute estimate of parameters for Categorical Mixture Models for N observed data ${{x_i}}_{i=1}^{N} = 1$
+
+1. Determine model parameters and initialize them.
+
+\end{latin}
+\raggedleft
+در واقع EM الگوریتمی برای یافتن MLE یا MAP برای مسئله های متغیرهای پنهان است اگر بدانیم هر نقطه به چه خوشه‌ای تعلق دارد (مثلاً متغیرهای $ {z_i} $ )می‌توانیم داده‌ها را تقسیم بندی کنیم و MLE را برای هر خوشه به طور جداگانه پیدا کنیم. هر xi با یک متغیر پنهان همراه است:
+$z_i = (z_{i1}, . . . , z_{iK} )$
+در نتیجه \lr{complete data} برای ما به شکل :
+$ (x , z) = (x_i , z_i ), i = 1, . . . , n $
+خواهد بود و حالا میتوانیم پارامتر ها را ماکزیمم کردن \lr{complete data} برای \lr{log likelihood} انجام دهیم 
+پارامتر متغیر پنهان zik  نشان دهنده سهم k-امین گاوسی در xi است مشتق \lr{log-likelihood}  برای دو متغیر 
+$  \pi_k , \theta_k  $
+که:
+
+\raggedright $ \pi = \pi_1,....,\pi_k $
+
+\raggedright $ \theta = ( \theta_1,...., \theta_k) $
+\begin{flushright}
+برای سه متغیر مشتق آن ها را روی صفر قرار میدهیم تا معادلات مورد استفاده در الگوریتم EM بدست آوریم
+برای محاسبه پارامتر های مدل که در بالا ذکر شدند ابتدا باید به این نکته توجه کنیم که:
+\end{flushright}
+\raggedright $ -\log Pr(x| \pi, \theta) = -\sum_{i=1}^{n}\log{ \sum_{k=1}^{K} \pi_kCat(x| \theta_k)} $
+\begin{flushright}
+حالا که متغیر پنهان z نیز ذر این معادله دخیل شود آنگاه شکل معادله به صورت زیر خواهد شد:
+\end{flushright}
+\raggedright $ -\log Pr(x,z| \pi, \theta) = -\sum_{i=1}^{n}\sum_{k=1}^{K}{\log\pi_k+\log Cat(x| \theta_k)}$
+\begin{flushright}
+
+\end{flushright}
+\begin{flushright}
+\newpage
+\begin{latin}
+\raggedright 2. Compute complete dataset likelihood.
+\raggedright 3. Find closed-form solution for parameters using EM algorithm.
+\end{latin}
+در اینجا هر دو پرسش بخش دو و سه را با هم پاسخ خواهیم داد:
+در ابتدا برای محاسبه \lr{E step } چون متغیر Z همانطور که در خود جزوه گفته شد و در معادله 3 جزوه آن را بررسی کردیم متغیر Z دارای توزیع Cat میباشد که پارامتر مربوط آن $ \pi $ میباشد.و مثل سوال قبلی که محاسبه کردیم این بار هم خواهیم داشت:
+\end{flushright}
+\begin{flalign*}
+r_{ik}^t = p(z_{i=k} \mid x_{i}, \theta^t) = \frac{\pi_{k}^t p(x_{i} \mid \theta_{k}^t)}{\sum_{k'=1}^{K}\pi_{k'}^t p(x_{i} \mid \theta_{k'}^t)}
+\end{flalign*}
+\begin{flushright}
+حال برای مرحله \lr{M step} باید $ ((\theta)L^{t} $ را برای توزیع Cat محاسبه و آن را حداکثر کرده و بعد مثل سوال قبل برای یک مرحله بعد پاسخ را محاسبه کنیم:
+(در معادلات پایین متغیر های $  \theta , \pi $ بولد شده در نظر گرفته میشوند منظورمان این است که این متغیر ها بردار هستند)
+\end{flushright}
+\begin{equation}
+L(t)(\theta) = \sum_{i} E_{r_i{(t)}} \left[ \ln \left( p_{X,Z}(x_i, z_i; \theta) \right) \right] = \sum_{i} E_{r_i^{(t)}} \left[ \ln \left( p_Z(z_i; \pi) p_{X|Z}(x_i|z_i; \theta) \right) \right]
+\end{equation}
+\begin{equation}
+= \sum_{i} E_{r_i^{(t)}} \left[ \ln \left( p_Z(z_i; \pi) \right) + \ln \left( p_{X|Z}(x_i|z_i; \theta) \right) \right]
+\end{equation}
+\begin{equation}
+= \sum_{i} E_{r_i^{(t)}} \left[ \ln \left( \prod_{k} \pi_{k}^{I[z_i=k]} \right) + \ln \left( \prod_{k} Cat(x_n|\theta_{k})^{I[z_i=k]} \right) \right]
+\end{equation}
+\begin{equation}
+= \sum_{i} E_{r_i^{(t)}} \left[ \sum_{k} I[z_i = k] \ln \pi_k + \sum_{k} I[z_i = k] \ln \left( Cat(x_i|\theta_k) \right) \right]
+\end{equation}
+\begin{equation}
+= \sum_{i} \sum_{k} E_{r^{(t)}_i} \left[ I[z_i = k] \right] \left( \ln \pi_k + \ln \left( Cat(x_i|\theta_k) \right) \right)
+\end{equation}
+\begin{equation}
+{E}_{r_i^{(t)}} [\mathcal I (z_i = k)] = \sum_{z_i} r^{(t)}_i \mathcal I(z_i = k) = r^{(t)}_i(z_i = k) = r^{(t)}_{n,k}
+\end{equation}
+\begin{flushright}
+با جای گذاری در رابطه اصلی خواهیم داشت:
+\end{flushright}
+\begin{equation}
+L^{(t)}(\theta)= \sum_{i} \sum_{k} E_{r^{(t)}_i} \left[ I[z_i = k] \right] \left( \ln \pi_k + \ln \left( Cat(x_i|\theta_k) \right) \right)
+\end{equation}
+\begin{equation}
+ \sum_{i} \sum_{k} {r^{(t)}_{i,k}}  \left( \ln \pi_k + \ln \left( Cat(x_i|\theta_k) \right) \right)
+\end{equation}
+\begin{equation}
+ \sum_{i} \sum_{k} {r^{(t)}_{i,k}} \ln \pi_k + \sum_{i} \sum_{k} {r^{(t)}_{i,k}} \ln ( Cat(x_i|\theta_k)) 
+\end{equation}
+\begin{flushright}
+با فرض اینکه متغیر Cat ما C کلاسه باشد:(متغیر xi به صوزت وان هات نوشته شده)
+\end{flushright}
+\begin{equation}
+\theta_k =
+\begin{bmatrix}
+\theta_{k,1} \\ \theta_{k,2} \\ \cdots \\ \theta_{k,C}
+\end{bmatrix}
+\end{equation}
+\begin{equation}
+x_i =
+\begin{bmatrix}
+x_{i,1} \\ x_{i,2} \\ \cdots \\ x_{i,C} 
+\end{bmatrix}
+(where      x_{i,c} = I[x_i = c])
+\end{equation}
+\begin{flalign*}
+L^{(t)}(\theta) = \sum_{i}\sum_{k}r^{(t)}_{i,k}\ln(\pi_k)
+\\
++ \sum_{i}\sum_{k}r^{(t)}_{i,k}\ln(\operatorname{Cat}(x_i|\theta_k)) 
+\\
+= \sum_{i}\sum_{k} r^{(t)}_{i,k}\ln(\pi_k) + \sum_{i}\sum_{k}r^{(t)}_{i,k}\ln \prod_c (\theta_{k,c}) ^{x_{i,c}}
+\\
+= \sum_{i}\sum_{k}r^{(t)}_{i,k}\ln(\pi_k) 
+\\
++ \sum_{i}\sum_{k}\sum_{c}r^{(t)}_{i,k}\ln(\theta_{k,c}) ^{x_{i,c}}
+\end{flalign*}
+\begin{flushright}
+حال برای ماکزیمم کردن عبارت بالا باید نسبت به پارامتر های 
+$ \theta_{k,c} , \pi_k $
+مشتق بگیریم و برابر صفر قرار دهیم و میدانیم که سیگمای تتا ها روی 1 تا c برابر یک خواهد شد
+در نتیجه با یک مسئله بهینه سازی مقید سر و کار داریم و به کمک ضرایب لاگرانژ:
+\end{flushright}
+\begin{equation}
+L(\theta, \lambda) = L^{(t)}(\theta) + \lambda\left(1 - \sum_{c} \theta_{k,c}\right)
+\end{equation}
+\begin{equation}
+\frac{\partial L(\theta, \lambda)}{\partial \theta_{k,c}} = 0 \Rightarrow \sum_{i} r^{(t)}_{i,k} x_{i,c}/ \theta_{k,c} = \lambda \Rightarrow \theta_{k,c} = \frac{1}{\lambda} \sum_{i} r^{(t)}_{i,k} x_{i,c}
+\end{equation}
+\begin{equation}
+\frac{\partial L(\theta, \lambda)}{\partial \lambda} = 0 \Rightarrow \sum_{c}\theta_{k,c}=1 \Rightarrow \frac{1}{\lambda}\sum_{i}r^{(t)}_{i,k}\left(\sum_{c}x_{i,c}\right)
+\end{equation}
+\begin{equation}
+=\frac{1}{\lambda}\sum_{i}r^{(t)}{i,k}(1)=1\Rightarrow \lambda=\sum{i}r^{(t)}_{i,k}=r^{(t)}_k
+\end{equation}
+\begin{equation}
+r^{(t)}_k = \sum_i r^{(t)}_{i,k}
+\end{equation}
+\begin{equation}
+\theta^{(t+1)}_{k,c} = \frac{\sum_i r^{(t)}{i,k}x_{i,c}}{\sum_i r^{(t)}_{i,k}} = \frac{\sum_i r^{(t)}_{i,k}x_{i,c}}{r^{(t)}_k}
+\end{equation}
+\begin{equation}
+\theta^{(t+1)}_k = \frac{1}{r^{(t)}_k}\begin{bmatrix}
+\sum_{i}r^{(t)}_{i,k}x_{i,1} \\ \sum_{i}r^{(t)}_{i,k}x_{i,2} \\  \dots \\ \sum_{i}r^{(t)}_{i,k}x_{i,C}
+\end{bmatrix}
+\end{equation}
+\begin{equation}
+L(\theta, \lambda) = L^{(t)}(\theta) + \lambda(1 - \sum_{k} \pi_k) \Rightarrow
+\end{equation}
+\begin{equation}
+\frac{\partial L(\theta, \lambda)}{\partial \pi_k} = 0 \Rightarrow \sum_{i} \frac{r^{(t)}_{i,k}}{\pi_k} = \lambda \Rightarrow \pi_k = \frac{1}{\lambda} \sum{i} r^{(t)}_{i,k}
+\end{equation}
+\begin{equation}
+\frac{\partial L(\theta, \lambda)}{\partial \lambda} = 0 \Rightarrow \sum_{k} \pi_k = 1 \Rightarrow \frac{1}{\lambda} \sum_{i} \sum_{k} r^{(t)}_{i,k} = 1
+\end{equation}
+\begin{align}
+\frac{1}{\lambda} \sum_{i} \sum_{k} r^{(t)}_{i,k} &= \frac{1}{\lambda} \sum_{i} \sum_{k} \frac{\pi^{(t)}_k p(x_i; \theta^{(t)}_k)}{\sum_{k'} \pi^{(t)}_{k'} p(x_i; \theta^{(t)}_{k'})} \
+\\
+&= \frac{N}{\lambda} \
+\\
+&= 1 \
+\end{align}
+\begin{equation}
+\pi_k^{(t+1)} = \frac{1}{\lambda} \sum_{i=1} r^{(t)}_{i,k} \
+= \frac{1}{N} \sum_{i=1} r^{(t)}_{i,k} = \frac{r^{(t)}_{k}}{N}
+\end{equation}
