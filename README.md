@@ -1,12 +1,15 @@
 # ML
 Introduction to machine learning project and homeworks
+
 Phase 1 :
   Introduction to mixture models
   Expectation Maximization
   EM algorithm for GMM and CMM
   EM algorithm in Real Applications
+
 Phase 2:
   Apply algorithm in phase 1 to infer clean image from corrupted images   
+
 Phase 3:
   Image Denoising:
     Download the MNIST dataset and create a dataloader that adds gaussian          noise to the input images.
